@@ -1,0 +1,58 @@
+<html>
+<head>
+</head>
+<body>
+<center>
+	<br>
+	<h3> BLOG WEBSITE </h3>
+	<BR>
+		<HR>
+			<BR>
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<table>
+		<tr>
+		<td><label>DESCRIPTION</label></td>
+		<td><textarea name="btext" placeholder="Enter the detailed description " required></textarea></td>
+		</tr>
+		<tr>
+		<td><label>DATE</label></td>
+		<td><input type = "date" name = "bdate" required></td>
+		</tr>
+		<tr>
+		<td><label>TIME</label></td>
+		<td><input type = "time" name = "btime" required></td>
+		</tr>
+		<tr>
+		<td><label>UPLOAD IMAGE</label></td>
+		<td><input type = "file" name = "bimage" required></td>
+		</tr>
+		<tr>
+			<td><input type = "submit" name = "submit" value="Upload"></td>
+			<td><input type = "reset"></td>
+		</tr>
+		</table>
+	</form>
+	{{blogdata}}
+	<br><br>
+	<table border = "3">
+		<tr>
+			<th>Blog ID</th>
+			<th>Blog Description</th>
+			<th>Blog Date</th>
+			<th>Blog time </th>
+			<th>Blog Image</th>	
+		</tr>
+		{% for b in blogdata %}
+		<tr>
+			<td>{{b.id}}</td>
+			<td>{{b.btext}}</td>
+			<td>{{b.bdate}}</td>
+			<td>{{b.btime}}</td>
+            <td>{{b.bimage}}<img src ="/media/{{b.bimage}}" width="10%"></td> 
+		</tr>
+		{% endfor %}
+	</table>
+</center>
+</body>
+</html>

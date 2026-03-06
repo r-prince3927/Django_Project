@@ -1,0 +1,134 @@
+<html>
+<head>
+</head>
+<body>
+<br><br><br><br><br>
+<center>
+<a href = "success"> Success </a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href = "success.html"> Success.html </a>
+<br> <br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<table  border="1">
+	<tr>
+		<th>  Image  </th>
+		<th>  Text  </th>
+	</tr>
+	<tr>
+		<td>  <img src ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCZHeOeTJ3UVPCVUlgN1BmTn0KUNcCRvDsYQ&s"  width ="10%"></td>
+		<td> <h1> Prince Kumar </h1> </td>
+	</tr>
+</table>
+	<br>
+<br> 
+	{{students}}
+	<br><br>
+	<table border="1">
+		<tr>
+			<th>sl no.</th>
+			<th>Name</th>
+			<th>Registration No.</th>
+			<th>Semester</th>
+			<th>CSW</th>
+		</tr>
+	{% for student in students %}
+	<tr>
+			<td>{{forloop.counter}}</td>
+			<td>{{student.name}}</td>
+			<td>{{student.Regd_no}}</td>
+			<td>{{student.sem}}</td>
+			<td>
+				<b>
+    {% if student.sem == 4 %}
+        <p style="color:#D45B8B"> CSW 2 <p>
+    {% elif student.sem == 3 %}
+        <p style="color:blue"> CSW 1 <p>
+    {% else %}
+       <p style="color:red"> NO <p>
+    {% endif %}
+	</b>
+</td>
+		</tr>
+	{% endfor %}  
+	</table>
+	<br><br><br>
+	<table border="1">
+		<tr>
+			<th>SL.No</th>
+			<th>User's Name</th>
+			<th>User's E-mail</th>
+			<th>User's Mobile</th>
+			<th>User's Age</th>
+			<th>User's Password</th>
+			<th>Eligible to Vote ? </th>
+			<th>Valid E-mail ?</th>
+		</tr>
+{% for voter in voters %}
+	<tr>
+			<td>{{forloop.counter}}</td>
+			<td>{{voter.name}}</td>
+			<td>{{voter.email}}</td>
+			<td>{{voter.mobile}}</td>
+			<td>{{voter.age}}</td>
+			<td>{{voter.password}}</td>
+			<td>
+				<b>
+    {% if voter.age >= 18 %}
+        <p style="color:green"> Eligible to Vote </p>
+    {% else %}
+       <p style="color:red"> NOT Eligible to Vote </p>
+    {% endif %}
+	</b>
+</td>
+<td>
+		<b>
+				{% if voter.valid_email %}
+					<p style="color:green"> Valid </p>
+				{% else %}
+					<p style="color:red"> Invalid </p>
+				{% endif %}
+	</b>
+</td>
+</tr>
+{% endfor %}  
+</table>
+<br><br><br>
+<br><br><br><br><br>
+    <h1>Form</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="Emp_name" placeholder="Enter Employee's Name" required>
+        <input type="text" name="Emp_Email"placeholder="Enter Employee's Email" required>
+        <input type="text" name="Emp_Mobile" placeholder="Enter Employee's Mobile Number" required>
+        <input type="submit" name="submit">
+        <input type="reset">
+    </form>
+    <br><br><br><br><br>
+    {{employee}}
+
+    <br><br><br><br><br><br>
+    <table border="2">
+        <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Employee Email</th>
+            <th>Employee Mobile</th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+        {% for e in employee %}
+        <tr>
+            <td>{{e.id}}</td>
+            <td> {{e.Emp_name}} </td>
+            <td> {{e.Emp_Email}} </td>
+            <td> {{e.Emp_Mobile}} </td>  
+            <td><button style="background-color: red;"><a href="delete/{{e.id}}"> Delete</a></button>
+                <button style = "background-color : yellow;"><a href="update/{{e.id}}">Update</a></button> </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+</body>
+</html>
